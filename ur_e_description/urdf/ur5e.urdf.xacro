@@ -376,11 +376,37 @@
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       </xacro:cylinder_inertial>
     </link>
+
+    <link name="${prefix}finger_r_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://ur_e_description/meshes/ur5e/visual/hand_e_finger.STL" />
+        </geometry>
+        <material name="LightGrey">
+          <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://ur_e_description/meshes/ur5e/visual/hand_e_finger.STL" />
+        </geometry>
+      </collision>
+      <!-- lazy guess -->
+      <xacro:cylinder_inertial radius="0.005" length="0.01" mass="0.001">
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
+    </link>
     
     <joint name="${prefix}finger_l_fixed_joint" type="fixed">
       <parent link="${prefix}hand_link" />
       <child link = "${prefix}finger_l_link" />
-      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+      <origin xyz="0.0 ${0.046 + 0.015} 0.0" rpy="0.0 0.0 ${-pi/2.0}" />
+    </joint>
+
+    <joint name="${prefix}finger_r_fixed_joint" type="fixed">
+      <parent link="${prefix}hand_link" />
+      <child link = "${prefix}finger_r_link" />
+      <origin xyz="0.0 ${0.046 + 0.015} 0.0" rpy="${pi} 0.0 ${-pi/2.0}" />
     </joint>
 
     <joint name="${prefix}ee_fixed_joint" type="fixed">
