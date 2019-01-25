@@ -356,6 +356,15 @@
       <!-- we fudge the length to make the two line up (probably because origin of hand is in rando place --> 
       <origin xyz="0.0 0.0 ${0.1005 - 0.0075}" rpy="${pi/2.0} 0.0 ${pi/2.0}" />
     </joint>
+
+
+    <link name="${prefix}grasp_point_fixed"/>
+
+    <joint name="${prefix}grasp_point_fixed_joint" type="fixed">
+      <parent link="${prefix}hand_link" />
+      <child link = "${prefix}grasp_point_fixed" />
+      <origin xyz="0.0 0.0 0.050" rpy="0.0 0.0 0.0" />
+    </joint>
     
     <link name="${prefix}finger_l_link">
       <visual>
