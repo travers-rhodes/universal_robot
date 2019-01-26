@@ -406,7 +406,7 @@
       </xacro:cylinder_inertial>
     </link>
     
-    <joint name="${prefix}finger_l_fixed_joint" type="prismatic">
+    <joint name="${prefix}finger_l_joint" type="prismatic">
       <parent link="${prefix}grasp_point_fixed" />
       <child link = "${prefix}finger_l_link" />
       <origin xyz="0.0 0.0 -0.0059" rpy="0.0 0.0 0.0" />
@@ -415,7 +415,7 @@
       <axis xyz="0 0 1"/>
     </joint>
 
-    <joint name="${prefix}finger_r_fixed_joint" type="prismatic">
+    <joint name="${prefix}finger_r_joint" type="prismatic">
       <parent link="${prefix}grasp_point_fixed" />
       <child link = "${prefix}finger_r_link" />
       <origin xyz="0.0 0.0 0.0059" rpy="${pi} 0.0 0.0" />
