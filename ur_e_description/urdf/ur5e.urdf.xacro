@@ -481,5 +481,15 @@
       <child link="${prefix}tool0"/>
     </joint>
 
+    <!-- realsense camera --> 
+    <xacro:include filename="$(find realsense2_camera)/urdf/_d435.urdf.xacro" />
+  
+    <!-- see http://wiki.ros.org/xacro for an explanation of the syntax of starred parameter passing -->
+    <xacro:sensor_d435 parent="${prefix}camera_holder">
+      <origin xyz="0 0.02 -0.049" rpy="0 ${-pi/2 - 0.6106} ${-pi/2}"/>
+    </xacro:sensor_d435>
+
+
+
   </xacro:macro>
 </robot>

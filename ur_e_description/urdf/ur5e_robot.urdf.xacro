@@ -7,10 +7,10 @@
 
   <!-- ur5e -->
   <xacro:include filename="$(find ur_e_description)/urdf/ur5e.urdf.xacro" />
-
+  
   <!-- arm -->
   <xacro:ur5e_robot prefix="" joint_limited="false"/>
-
+ 
   <link name="world" />
 
   <joint name="world_joint" type="fixed">
