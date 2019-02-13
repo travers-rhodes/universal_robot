@@ -301,33 +301,6 @@
       </xacro:cylinder_inertial>
     </link>
     
-    <link name="${prefix}wrist_coupling_link">
-      <visual>
-        <geometry>
-          <mesh filename="package://ur_e_description/meshes/ur5e/visual/wrist_coupling.STL" />
-        </geometry>
-        <material name="LightGrey">
-          <color rgba="0.7 0.7 0.7 1.0"/>
-        </material>
-      </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://ur_e_description/meshes/ur5e/visual/wrist_coupling.STL" />
-        </geometry>
-      </collision>
-      <!-- computed from https://robotiq.com/support/hand-e-adaptive-robot-gripper/documents-gripper-instruction-manual-e-series weight was guessed -->
-      <xacro:cylinder_inertial radius="0.375" length="0.0169" mass="0.010">
-        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-      </xacro:cylinder_inertial>
-    </link>
-    
-    <joint name="${prefix}wrist_coupling_fixed_joint" type="fixed">
-      <parent link="${prefix}wrist_3_link" />
-      <child link = "${prefix}wrist_coupling_link" />
-      <!-- will need to fudge the length to account for origin being inside the coupling -->
-      <origin xyz="0.0 ${wrist_3_length} 0.0" rpy="${-pi/2.0} 0.0 0.0" />
-    </joint>
-    
     <link name="${prefix}hand_link">
       <visual>
         <geometry>
@@ -350,11 +323,11 @@
       </inertial>
     </link>
  
-    <joint name="${prefix}hand_coupling_fixed_joint" type="fixed">
-      <parent link="${prefix}wrist_coupling_link" />
+    <joint name="${prefix}hand_wrist_fixed_joint" type="fixed">
+      <parent link="${prefix}wrist_3_link" />
       <child link = "${prefix}hand_link" />
       <!-- we fudge the length to make the two line up (probably because origin of hand is in rando place --> 
-      <origin xyz="0.0 0.0 ${0.1005 - 0.0075}" rpy="${pi/2.0} 0.0 ${pi/2.0}" />
+      <origin xyz="0.0 ${wrist_3_length + 0.1005 - 0.0075} 0.0" rpy="0.0 ${-pi/2.0} 0.0" />
     </joint>
 
 
@@ -486,16 +459,6 @@
       <parent link="${prefix}wrist_3_link"/>
       <child link="${prefix}tool0"/>
     </joint>
-
-    <!-- realsense camera --> 
-    <xacro:include filename="$(find realsense2_camera)/urdf/_d435.urdf.xacro" />
-  
-    <!-- see http://wiki.ros.org/xacro for an explanation of the syntax of starred parameter passing -->
-    <xacro:sensor_d435 parent="${prefix}camera_holder">
-      <origin xyz="0 0.02 -0.049" rpy="0 ${-pi/2 - 0.6106} ${-pi/2}"/>
-    </xacro:sensor_d435>
-
-
 
   </xacro:macro>
 </robot>
